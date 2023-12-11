@@ -54,7 +54,7 @@ Now you can simply dedicate a header file for the declaration of the scanner.
 // token.hpp
 #pragma once
 #define TOKEN_CLASS_NAME TestTokenType
-#define TOKEN_DESCRIPTOR_FILE "test.def"
+#define TOKEN_DESCRIPTOR_FILE "my_tokens.def"
 #include "scanner_gen.hpp"
 ```
 
