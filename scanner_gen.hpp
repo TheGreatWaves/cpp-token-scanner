@@ -767,7 +767,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -796,7 +797,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -819,7 +821,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -842,7 +845,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -870,7 +874,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -892,7 +897,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -915,7 +921,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -938,7 +945,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -962,7 +970,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -1040,6 +1049,26 @@ struct SCANNER(TOKEN_CLASS_NAME)
     }
 
     /**
+     * Consume the whole string.
+     */
+    [[nodiscard]] detail::Token<TOKEN_CLASS_NAME> scan_string() noexcept
+    {
+        while (peek() != '"' && !is_at_end())
+        {
+            if (peek() == '\n') ++line;
+            advance_position();
+        }
+
+        if (is_at_end())
+            return error_token("Unterminated string.");
+
+        // Terminator.
+        advance();
+
+        return make_token(TOKEN_CLASS_NAME::String);
+    }
+
+    /**
      * Return the identifer type. This could return as
      * one of the keyword types.
      */
@@ -1063,7 +1092,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
@@ -1097,6 +1127,7 @@ TOKEN(Identifier)
         #define CCASE(character, token) break; case character: return make_token(token)
         switch (c)
         {
+            break; case '"': return scan_string();
             #define SYMBOL_TOKEN(name, symbol) break; case symbol[0]: return make_token(TOKEN_CLASS_NAME::name);
 #ifndef TOKEN
 #define TOKEN(name)
@@ -1111,7 +1142,8 @@ TOKEN(Error)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
- #include TOKEN_DESCRIPTOR_FILE
+TOKEN(String)
+#include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
 #undef TOKEN
