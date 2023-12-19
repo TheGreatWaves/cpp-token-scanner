@@ -583,20 +583,14 @@ struct Token
 
 #endif /* TOKEN_H */
 
-#ifndef HDL_PARSER_BASE
-#define HDL_PARSER_BASE
+#ifndef PARSER_BASE_H
+#define PARSER_BASE_H
 
 #include <exception>
 #include <stdexcept>
 #include <string>
 #include <string_view>
 
-/**
- * The parser for the HDL. This parser does not form an AST, it will
- * directly form a RecipeBuilder object, which can then be executed.
- * With the current design, a single parser is only intended to parse
- * a single file with a single CHIP declaration.
- */
 template <class Scanner, class TokenType>
 class BaseParser
 {
@@ -607,9 +601,6 @@ class BaseParser
     };
 
   public:
-    /**
-     * Constructor with file path of HDL source code.
-     */
     [[nodiscard]] explicit BaseParser(const std::string& input, Type type = Type::File)
     {
         if (type == Type::File)
@@ -737,7 +728,7 @@ class BaseParser
     bool has_error{false};
 };
 
-#endif /* HDL_PARSER_BASE */
+#endif /* PARSER_BASE_H */
 
 } // namespace detail
 
@@ -983,10 +974,6 @@ TOKEN(String)
 #include <sstream>
 #include <string>
 
-#ifndef JOIN
-#define JOIN(a, b) a##b
-#endif
-
 #ifndef SCANNER
 #define SCANNER(name) JOIN(name, Scanner)
 #endif
@@ -1000,7 +987,6 @@ struct SCANNER(TOKEN_CLASS_NAME)
 {
   public:
 
-    // JOIN(TOKEN_CLASS_NAME, Scanner)() = default;
     SCANNER(TOKEN_CLASS_NAME)() = default;
 
     
@@ -1274,7 +1260,7 @@ TOKEN(String)
 };
 
 #undef SCANNER
-
+#undef JOIN
 #endif
 
 #undef TOKEN_DESCRIPTOR_FILE
