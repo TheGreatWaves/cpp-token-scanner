@@ -755,6 +755,7 @@ DECLARE_RAW_ENUM_CLASS(TOKEN_CLASS_NAME, uint8_t) {
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -785,6 +786,7 @@ public:
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -809,6 +811,7 @@ TOKEN(String)
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -833,6 +836,7 @@ DEFINE_ENUM_CLASS_NAMES(TOKEN_CLASS_NAME) = {
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -862,6 +866,7 @@ ALL_KEYWORD_TOKENS_DEFINITION(TOKEN_CLASS_NAME) = {
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -885,6 +890,7 @@ ALL_TOKENS_DEFINITION(TOKEN_CLASS_NAME) = {
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -909,6 +915,7 @@ KEYWORD_MARKER_DEFINITION(TOKEN_CLASS_NAME) = {
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -933,6 +940,7 @@ SYMBOL_MARKER_DEFINITION(TOKEN_CLASS_NAME) = {
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -958,6 +966,7 @@ SYMBOL_STRING_DEFINITION(TOKEN_CLASS_NAME) = {
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -1075,6 +1084,7 @@ struct SCANNER(TOKEN_CLASS_NAME)
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
@@ -1125,6 +1135,7 @@ TOKEN(String)
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
 TOKEN(Error)
+TOKEN(Raw)
 TOKEN(EndOfFile)
 TOKEN(Number)
 TOKEN(Identifier)
