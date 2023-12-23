@@ -105,3 +105,21 @@ switch(token.type)
   // other cases...
 }
 ```
+Additionally, a `Basic Parser` type is provided. The following showcases how a paresr class may be created.
+```cpp
+class TestParser : public BaseParser<TestTokenTypeScanner, TestTokenType>
+{
+  public:
+    /**
+     * Constructor with file path of source.
+     */
+    [[nodiscard]] explicit TestParser(const std::string& file_path)
+        : BaseParser<TestTokenTypeScanner, TestTokenType>(file_path)
+    {
+    }
+
+    /**
+     * Default Ctor prohibted.
+     */
+    constexpr TestParser() = delete;
+```
