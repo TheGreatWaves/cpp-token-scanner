@@ -123,3 +123,7 @@ class TestParser : public BaseParser<TestTokenTypeScanner, TestTokenType>
      */
     constexpr TestParser() = delete;
 ```
+The following methods are provided.
+- `consume` - Consume the current token under the assumption that it matches a certain token. An error message is to be provided in the case that the match fails.
+- `advance` - Move to the next token.
+- `match` - Give a token type, match the current token with the type, if it matches, advance.
