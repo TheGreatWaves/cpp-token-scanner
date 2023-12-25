@@ -134,7 +134,7 @@ auto parse() -> bool
 {
  advance();
 
- while (match(Token::EndOfFile))
+ while (!match(Token::EndOfFile))
  {
     declaration();
  }
