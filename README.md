@@ -34,15 +34,8 @@ SYMBOL_TOKEN(Equal,      "=")
 /**
  * Keywords.
  */
-KEYWORD_TOKEN(Require, "REQUIRE")
-KEYWORD_TOKEN(Var,     "VAR")
-KEYWORD_TOKEN(Set,     "SET")
-KEYWORD_TOKEN(Load,    "LOAD")
-KEYWORD_TOKEN(Eval,    "EVAL")
-KEYWORD_TOKEN(And,     "AND")
-KEYWORD_TOKEN(Test,    "TEST")
-KEYWORD_TOKEN(Is,      "IS")
-KEYWORD_TOKEN(Not,     "NOT")
+KEYWORD_TOKEN(If,     "if")
+KEYWORD_TOKEN(Else,   "else")
 ```
 
 Now you can simply dedicate a header file for the declaration of the scanner.
@@ -122,8 +115,62 @@ class TestParser : public BaseParser<TestTokenTypeScanner, TestTokenType>
      * Default Ctor prohibted.
      */
     constexpr TestParser() = delete;
+};
 ```
 The following methods are provided.
 - `consume` - Consume the current token under the assumption that it matches a certain token. An error message is to be provided in the case that the match fails.
 - `advance` - Move to the next token.
 - `match` - Give a token type, match the current token with the type, if it matches, advance.
+- `report_error` - Report error specified error message.
+
+Here is how one might write a parsing loop.
+
+```cpp
+// Inside the parser class
+
+using Token = TestTokenType;
+
+auto parse() -> bool 
+{
+ advance();
+
+ while (match(Token::EndOfFile))
+ {
+    declaration();
+ }
+
+ return !this->has_error;
+}
+
+auto declaration() -> void
+{
+  if (match(Token::If)
+  {
+     parse_if();
+  }
+}
+
+auto parse_if() -> void
+{
+   // At this point, the previous match would've already consumed the `If`, so we can now parse the expression.
+   auto expression = parse_expression();
+
+   // Consume the beginning of the if statement body.
+   consume(Token::LBrace, "Expected '{' at the beginning of if body.");
+
+   while (!match(Token::EndOfFile) && !match(Token::RBrace))
+   {
+      // parse each statements in the body...
+   }
+
+   if (previous.type == Token::EndOfFile)
+   {
+      report_error("Expected '}' at the end of if body.");
+   }
+
+   if (match(Token::Else))
+   {
+      // parse else...
+   }
+}
+```
