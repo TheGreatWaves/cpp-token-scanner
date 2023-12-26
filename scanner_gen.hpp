@@ -1096,6 +1096,12 @@ TOKEN(String)
         ENDMATCH;
     }
 
+    [[nodiscard]] detail::Token<TOKEN_CLASS_NAME> scan_until(char token) noexcept
+    {
+        while (peek()!=token) advance_position();
+        return make_token(TOKEN_CLASS_NAME::Raw);
+    }
+
     /**
      * Return the next token.
      */
