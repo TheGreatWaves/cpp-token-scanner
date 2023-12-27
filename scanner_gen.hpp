@@ -1096,9 +1096,19 @@ TOKEN(String)
         ENDMATCH;
     }
 
-    [[nodiscard]] detail::Token<TOKEN_CLASS_NAME> scan_until(char token) noexcept
+    [[nodiscard]] detail::Token<TOKEN_CLASS_NAME> scan_until_character(char token) noexcept
     {
         while (peek()!=token) advance_position();
+        return make_token(TOKEN_CLASS_NAME::Raw);
+    }
+
+    [[nodiscard]] detail::Token<TOKEN_CLASS_NAME> scan_until_token(TOKEN_CLASS_NAME token) noexcept
+    {
+        const auto start_pos = current;
+        detail::Token<TOKEN_CLASS_NAME> tok;
+        while (!is_at_end() && ((tok = scan_token()).type != token)) {/* do nothing */}
+        start = start_pos;
+        current -= tok.lexeme.size();
         return make_token(TOKEN_CLASS_NAME::Raw);
     }
 
