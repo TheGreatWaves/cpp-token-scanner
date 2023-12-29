@@ -754,6 +754,9 @@ DECLARE_RAW_ENUM_CLASS(TOKEN_CLASS_NAME, uint8_t) {
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -763,6 +766,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 };
 
@@ -785,6 +789,9 @@ public:
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -794,6 +801,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 };
 
@@ -801,14 +809,14 @@ TOKEN(String)
  * Generate constant definitions.
  */
 #define TOKEN(name) ENUM_CONSTANT_DEFINITION_ENUMERATOR(TOKEN_CLASS_NAME, name)
-#ifndef TOKEN
-#define TOKEN(name)
-#endif
 #ifndef KEYWORD_TOKEN
 #define KEYWORD_TOKEN(name, keyword) TOKEN(name)
 #endif
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
+#endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character)
 #endif
 TOKEN(Error)
 TOKEN(Raw)
@@ -819,6 +827,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 
 /**
@@ -835,6 +844,9 @@ DEFINE_ENUM_CLASS_NAMES(TOKEN_CLASS_NAME) = {
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -844,6 +856,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 };
 
@@ -855,7 +868,7 @@ TOKEN(String)
 
 // Marking keywords.
 ALL_KEYWORD_TOKENS_DEFINITION(TOKEN_CLASS_NAME) = {
- #define KEYWORD_TOKEN(name, symbol) TOKEN_ENUM_VALUE(TOKEN_CLASS_NAME, name)
+#define KEYWORD_TOKEN(name, symbol) TOKEN_ENUM_VALUE(TOKEN_CLASS_NAME, name)
 #ifndef TOKEN
 #define TOKEN(name)
 #endif
@@ -864,6 +877,9 @@ ALL_KEYWORD_TOKENS_DEFINITION(TOKEN_CLASS_NAME) = {
 #endif
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
+#endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character) TOKEN(character)
 #endif
 TOKEN(Error)
 TOKEN(Raw)
@@ -874,6 +890,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 };
 
@@ -889,6 +906,9 @@ ALL_TOKENS_DEFINITION(TOKEN_CLASS_NAME) = {
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -898,6 +918,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 };
 
@@ -914,6 +935,9 @@ KEYWORD_MARKER_DEFINITION(TOKEN_CLASS_NAME) = {
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character) TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -923,6 +947,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 };
 
@@ -939,6 +964,9 @@ SYMBOL_MARKER_DEFINITION(TOKEN_CLASS_NAME) = {
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character) TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -948,6 +976,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 };
 
@@ -965,6 +994,9 @@ SYMBOL_STRING_DEFINITION(TOKEN_CLASS_NAME) = {
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character) TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -974,6 +1006,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
 };
 
@@ -1083,6 +1116,9 @@ struct SCANNER(TOKEN_CLASS_NAME)
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character) TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -1092,6 +1128,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
         ENDMATCH;
     }
@@ -1150,6 +1187,9 @@ TOKEN(String)
 #ifndef SYMBOL_TOKEN
 #define SYMBOL_TOKEN(name, symbol) TOKEN(name)
 #endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character) TOKEN(character)
+#endif
 TOKEN(Error)
 TOKEN(Raw)
 TOKEN(EndOfFile)
@@ -1159,6 +1199,7 @@ TOKEN(String)
 #include TOKEN_DESCRIPTOR_FILE
 #undef SYMBOL_TOKEN
 #undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
 #undef TOKEN
         }
         #undef CCASE
@@ -1237,9 +1278,23 @@ TOKEN(String)
                 {
                     ++line;
                 }
-                       case '\r':
-                       case '\t':
-                       case ' ':
+#ifndef TOKEN
+#define TOKEN(name)
+#endif
+#ifndef KEYWORD_TOKEN
+#define KEYWORD_TOKEN(name, keyword) TOKEN(name)
+#endif
+#ifndef SYMBOL_TOKEN
+#define SYMBOL_TOKEN(name, symbol) TOKEN(name)
+#endif
+#ifndef IGNORE_TOKEN
+#define IGNORE_TOKEN(character) case character[0]:
+#endif
+#include TOKEN_DESCRIPTOR_FILE
+#undef SYMBOL_TOKEN
+#undef KEYWORD_TOKEN
+#undef IGNORE_TOKEN
+#undef TOKEN
                 {
                     advance_position();
                 }
