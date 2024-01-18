@@ -23,6 +23,10 @@
  * SOFTWARE.
  */
 
+#ifndef JOIN
+#define JOIN(a, b) a ## b
+#endif
+
 #ifndef TOKEN_DESCRIPTOR_FILE
 #error "TOKEN_DESCRIPTOR_FILE not specified."
 #else
@@ -352,8 +356,6 @@ namespace cpp20trie
  * This enum implementation technique is heaviliy inspired by the Carbon programming language enums.
  */
 
-// Fixing macro pasting issue.
-#define JOIN(x, y) x ## y
 
 /**
  * Use to declare a new raw enum class. Note that this also define 
@@ -1361,6 +1363,9 @@ TOKEN(String)
 };
 
 #undef SCANNER
+#endif
+
+#ifdef JOIN
 #undef JOIN
 #endif
 
