@@ -1149,6 +1149,23 @@ TOKEN(String)
         return make_token(TOKEN_CLASS_NAME::Raw);
     }
 
+    [[nodiscard]] detail::Token<TOKEN_CLASS_NAME> scan_body(TOKEN_CLASS_NAME head, TOKEN_CLASS_NAME tail) noexcept
+    {
+        const auto start_pos = current;
+        detail::Token<TOKEN_CLASS_NAME> tok;
+
+        int scope_count = 1;
+        while (scope_count != 0 && !is_at_end())
+        {
+           tok = scan_token();
+           scope_count += (tok.type == head) ? 1 : 0;
+           scope_count -= (tok.type == tail) ? 1 : 0;
+        }
+        start = start_pos;
+        current -= tok.lexeme.size();
+        return make_token(TOKEN_CLASS_NAME::Raw);
+    }
+
     /**
      * Return the next token.
      */
@@ -1277,6 +1294,7 @@ TOKEN(String)
                 break; case '\n':
                 {
                     ++line;
+                    return;
                 }
 #ifndef TOKEN
 #define TOKEN(name)
@@ -1323,6 +1341,7 @@ TOKEN(String)
     [[nodiscard]] detail::Token<TOKEN_CLASS_NAME> make_token(const TOKEN_CLASS_NAME type) noexcept 
     {
         const std::size_t length = current - start;
+        const auto what = this->source_code.substr(start, length);
         return detail::Token(type, this->source_code.substr(start, length), this->line);
     }
 
