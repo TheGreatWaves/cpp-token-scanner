@@ -11,7 +11,8 @@ There are three different tokens which you can add.
 - `IGNORE_TOKEN`
 
 > [!NOTE]  
-> There are some tokens which are added by default: `Error`, `EndOfFile`, `Number` and `Identifier`.
+> - There are some tokens which are added by default: `Error`, `EndOfFile`, `Number` and `Identifier`.
+> - `IGNORE_TOKEN` can only be used to ignore characters.
 ```c
 // my_tokens.def
 
@@ -37,6 +38,13 @@ SYMBOL_TOKEN(Equal,      "=")
  */
 KEYWORD_TOKEN(If,     "if")
 KEYWORD_TOKEN(Else,   "else")
+
+/**
+ * Characters to ignore.
+ */
+IGNORE_TOKEN(" ")
+IGNORE_TOKEN("\n")
+IGNORE_TOKEN("\t")
 ```
 
 Now you can simply dedicate a header file for the declaration of the scanner.
