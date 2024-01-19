@@ -5,9 +5,10 @@ A dead simple library for generating a scanner based on a set of user defined to
 
 Simply define a list tokens.
 
-There are two different tokens which you can add.
+There are three different tokens which you can add.
 - `SYMBOL_TOKEN`
 - `KEYWORD_TOKEN`
+- `IGNORE_TOKEN`
 
 > [!NOTE]  
 > There are some tokens which are added by default: `Error`, `EndOfFile`, `Number` and `Identifier`.
