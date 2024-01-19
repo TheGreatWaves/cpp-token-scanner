@@ -1173,7 +1173,6 @@ TOKEN(String)
      */
     [[nodiscard]] detail::Token<TOKEN_CLASS_NAME> scan_token() noexcept
     {
-        count_line();
         skip_whitespace();
         start = current;
 
@@ -1297,6 +1296,7 @@ TOKEN(String)
     {
         while (true)
         {
+            count_line();
             switch (peek())
             {
 #ifndef TOKEN
