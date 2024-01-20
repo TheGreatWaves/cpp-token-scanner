@@ -107,7 +107,21 @@ switch(token.type)
   // other cases...
 }
 ```
-Additionally, a `Basic Parser` type is provided. The following showcases how a paresr class may be created.
+
+# Scanner API
+The following fundamental APIs are provided by the Scanner class.
+- `set_source(string source) -> void`
+- `read_source(string path) -> void`
+- `scan_number() -> Token`
+- `scan_identifier() -> Token`
+- `scan_string() -> Token`
+- `scan_until_character(char character) -> Token`
+- `scan_until_token(TokenType token) -> Token`
+- `scan_body(TokenType head, TokenType tail) -> Token`
+- `scan_token() -> Token`
+- `is_at_end() -> bool`
+# Parser
+A `Basic Parser` type is provided for convenience. The following showcases how a paresr class may be created.
 ```cpp
 class TestParser : public BaseParser<TestTokenTypeScanner, TestTokenType>
 {
