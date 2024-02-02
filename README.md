@@ -1,6 +1,9 @@
 # cpp-token-scanner
 A dead simple library for generating a scanner based on a set of user defined tokens.
 
+> [!NOTE]
+> This library is highly unstable and subject to change. At the moment the namespaces are poorly maintained.
+
 # Usage
 
 Simply define a list tokens.
